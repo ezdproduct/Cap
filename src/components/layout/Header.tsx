@@ -58,17 +58,24 @@ const Header = () => {
         <div className="flex items-center space-x-2">
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center space-x-2">
+            {/* Nút Giỏ hàng được đặt trước nút Đăng nhập */}
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              aria-label="Shopping Cart"
+              // Loại bỏ hiệu ứng nền hover mặc định của variant="ghost" và chỉ đổi màu icon
+              className="text-gray-600 hover:bg-transparent hover:text-gray-900"
+            >
+              <ShoppingCart className="h-6 w-6" />
+            </Button>
+            
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
               <Button 
-                // Điều chỉnh padding để khớp với chiều cao của các mục điều hướng (py-1.5)
                 className="bg-cap-dark-blue hover:bg-cap-purple text-white rounded-md transition-colors text-base px-4 py-1.5 h-auto"
               >
                 Đăng nhập
               </Button>
             </a>
-            <Button variant="ghost" size="icon" aria-label="Shopping Cart">
-              <ShoppingCart className="h-6 w-6" />
-            </Button>
           </div>
           
           {/* Mobile Menu Trigger */}

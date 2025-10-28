@@ -22,7 +22,7 @@ const Header = () => {
           <img 
             src="https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png" 
             alt="CAP English Training Logo" 
-            className="h-12 w-auto" 
+            className="h-10 w-auto" 
           />
         </Link>
 

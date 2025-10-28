@@ -16,13 +16,13 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white">
-      <div className="px-10 mx-auto max-w-screen-2xl flex h-16 items-center justify-between">
+      <div className="px-10 mx-auto max-w-screen-2xl flex h-20 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <img 
             src="https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png" 
             alt="CAP English Training Logo" 
-            className="h-10 w-auto" 
+            className="h-12 w-auto" 
           />
         </Link>
 
@@ -59,10 +59,14 @@ const Header = () => {
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center space-x-2">
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
-              <Button className="bg-cap-dark-blue hover:bg-cap-purple text-white rounded-md transition-colors">Đăng nhập</Button>
+              <Button 
+                className="bg-cap-dark-blue hover:bg-cap-purple text-white rounded-md transition-colors text-lg px-6 py-3 h-auto"
+              >
+                Đăng nhập
+              </Button>
             </a>
             <Button variant="ghost" size="icon" aria-label="Shopping Cart">
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCart className="h-6 w-6" />
             </Button>
           </div>
           

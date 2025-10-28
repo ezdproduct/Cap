@@ -36,8 +36,7 @@ const CoursesSection = () => {
     );
   }, [courses, activeFilter]);
 
-  // Không cần chunking nữa nếu chỉ hiển thị 1 thẻ trên mỗi slide mobile
-  // const mobileCourseChunks = useMemo(() => chunk(filteredCourses, 2), [filteredCourses]);
+  const mobileCourseChunks = useMemo(() => chunk(filteredCourses, 2), [filteredCourses]);
 
   return (
     <section id="courses" className="pt-0 pb-12 md:pb-16 bg-white">
@@ -70,17 +69,37 @@ const CoursesSection = () => {
           >
             <Carousel opts={{ align: "start" }} className="w-full mx-auto">
               <CarouselContent className="-ml-2">
-                {/* Trên mobile, hiển thị 1 thẻ trên mỗi slide */}
-                {filteredCourses.map((course) => (
-                  <CarouselItem key={course.id} className="basis-full sm:basis-1/2 lg:basis-1/3 pl-2">
-                    <div className="p-1">
-                      <CourseCard
-                        {...course}
-                        categories={course.categories.join(", ")}
-                      />
-                    </div>
-                  </CarouselItem>
-                ))}
+                {isMobile ? (
+                  mobileCourseChunks.map((chunk, index) => (
+                    <CarouselItem key={index} className="basis-full pl-2">
+                      <div className="space-y-2">
+                        {chunk.map((course) => (
+                           <div key={course.id} className="p-1">
+                             <CourseCard
+                               {...course}
+                               categories={course.categories.join(", ")}
+                             />
+                           </div>
+                        ))}
+                      </div>
+                    </CarouselItem>
+                  ))
+                ) : (
+                  filteredCourses.map((course) => (
+                    <CarouselItem
+                      key={course.id}
+                      // Đặt lg:basis-1/3 và loại bỏ xl/2xl để giữ 3 cột trên desktop
+                      className="basis-1/2 lg:basis-1/3 pl-2"
+                    >
+                      <div className="p-1">
+                        <CourseCard
+                          {...course}
+                          categories={course.categories.join(", ")}
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))
+                )}
               </CarouselContent>
               <CarouselPrevious className="hidden md:flex -left-12 bg-transparent border-none shadow-none hover:bg-transparent text-gray-800" />
               <CarouselNext className="hidden md:flex -right-12 bg-transparent border-none shadow-none hover:bg-transparent text-gray-800" />

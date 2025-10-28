@@ -88,7 +88,8 @@ const CoursesSection = () => {
                   filteredCourses.map((course) => (
                     <CarouselItem
                       key={course.id}
-                      className="basis-1/2 lg:basis-1/3 xl:basis-1/4 pl-2"
+                      // Đặt lg:basis-1/3 và loại bỏ xl/2xl để giữ 3 cột trên desktop
+                      className="basis-1/2 lg:basis-1/3 pl-2"
                     >
                       <div className="p-1">
                         <CourseCard

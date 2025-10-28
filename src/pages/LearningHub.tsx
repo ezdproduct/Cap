@@ -111,8 +111,8 @@ const LearningHub = () => {
     <>
       <Header />
       <main className="py-8">
-        <div className="px-10 mx-auto max-w-screen-2xl grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <div className="lg-col-span-1">
+        <div className="px-10 mx-auto max-w-screen-2xl grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8">
+          <div>
             <FilterSidebar
               filters={availableFilters}
               selectedFilters={selectedFilters}
@@ -121,7 +121,7 @@ const LearningHub = () => {
               onSearchChange={setSearchTerm}
             />
           </div>
-          <div className="lg:col-span-3 flex flex-col justify-between">
+          <div className="flex flex-col justify-between">
             <CourseGrid courses={filteredCourses} />
             {totalPages > 1 && (
               <Pagination className="mt-8">

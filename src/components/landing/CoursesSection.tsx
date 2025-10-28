@@ -36,7 +36,8 @@ const CoursesSection = () => {
     );
   }, [courses, activeFilter]);
 
-  const mobileCourseChunks = useMemo(() => chunk(filteredCourses, 2), [filteredCourses]);
+  // Thay đổi chunking: 1 thẻ/slide trên mobile
+  const mobileCourseChunks = useMemo(() => chunk(filteredCourses, 1), [filteredCourses]);
 
   return (
     <section id="courses" className="pt-0 pb-12 md:pb-16 bg-white">
@@ -88,7 +89,6 @@ const CoursesSection = () => {
                   filteredCourses.map((course) => (
                     <CarouselItem
                       key={course.id}
-                      // Đặt lg:basis-1/3 và loại bỏ xl/2xl để giữ 3 cột trên desktop
                       className="basis-1/2 lg:basis-1/3 pl-2"
                     >
                       <div className="p-1">

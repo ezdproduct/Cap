@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Filter, X } from 'lucide-react';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
+import { Filter } from 'lucide-react';
 import FilterSidebar from './FilterSidebar';
 
 interface MobileFilterButtonProps {
@@ -26,23 +26,18 @@ const MobileFilterButton: React.FC<MobileFilterButtonProps> = ({
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
+    <Drawer open={isOpen} onOpenChange={setIsOpen}>
+      <DrawerTrigger asChild>
         <Button variant="outline" className="w-full flex items-center justify-center lg:hidden mb-6">
           <Filter className="w-4 h-4 mr-2" />
           Bộ lọc
         </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="w-full sm:max-w-xs p-0">
-        <SheetHeader className="p-4 border-b">
-          <SheetTitle className="flex justify-between items-center">
-            Bộ lọc khóa học
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
-              <X className="w-5 h-5" />
-            </Button>
-          </SheetTitle>
-        </SheetHeader>
-        <div className="h-[calc(100vh-60px)] overflow-y-auto">
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Bộ lọc khóa học</DrawerTitle>
+        </DrawerHeader>
+        <div className="p-4 overflow-y-auto">
           <FilterSidebar
             filters={filters}
             selectedFilters={selectedFilters}
@@ -52,8 +47,8 @@ const MobileFilterButton: React.FC<MobileFilterButtonProps> = ({
             onApply={handleApply}
           />
         </div>
-      </SheetContent>
-    </Sheet>
+      </DrawerContent>
+    </Drawer>
   );
 };
 

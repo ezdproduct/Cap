@@ -47,7 +47,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <div className="absolute top-3 left-3 bg-cap-purple text-white px-3 py-1 text-xs font-semibold rounded-full">
             {level}
           </div>
-          <Button variant="outline" size="icon" className="absolute top-3 right-3 bg-white/80 rounded-full w-8 h-8 border-none" onClick={handleButtonClick}>
+          <Button 
+            variant="outline" 
+            size="icon" 
+            // Đổi bg-white/80 thành bg-white
+            className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 border-none" 
+            onClick={handleButtonClick}
+          >
             <Bookmark className="h-4 w-4 text-gray-600" />
           </Button>
         </div>

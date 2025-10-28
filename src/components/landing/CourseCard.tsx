@@ -85,38 +85,45 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </div>
           
           <div className="mt-auto pt-4 border-t">
-            {isFree ? (
-              <Button 
-                variant="outline" 
-                className="w-full border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white" 
-                onClick={handleButtonClick}
-              >
-                Đăng ký
-              </Button>
-            ) : (
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-                {/* Điều chỉnh phần hiển thị giá */}
-                <div className="flex items-center gap-2">
-                  {discountedPrice && (
-                    <p className="text-sm line-through text-muted-foreground font-normal">
-                      {price}
+            <div className="flex items-center justify-between gap-2">
+              {/* Phần hiển thị Giá / Miễn phí */}
+              <div className="flex items-center gap-2 flex-shrink-0">
+                {isFree ? (
+                  <p className="text-lg font-bold text-cap-dark-blue">Miễn phí</p>
+                ) : (
+                  <>
+                    {discountedPrice && (
+                      <p className="text-sm line-through text-muted-foreground font-normal">
+                        {price}
+                      </p>
+                    )}
+                    <p className="text-lg font-bold text-cap-dark-blue">
+                      {discountedPrice || price}
                     </p>
-                  )}
-                  <p className="text-lg font-bold text-cap-dark-blue">
-                    {discountedPrice || price}
-                  </p>
-                </div>
-                {/* Nút Thêm */}
+                  </>
+                )}
+              </div>
+              
+              {/* Nút hành động */}
+              {isFree ? (
                 <Button 
                   variant="outline" 
-                  className="w-full sm:w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white" 
+                  className="w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white flex-shrink-0" 
+                  onClick={handleButtonClick}
+                >
+                  <span>Đăng ký</span>
+                </Button>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  className="w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white flex-shrink-0" 
                   onClick={handleButtonClick}
                 >
                   <ShoppingCart className="h-4 w-4 sm:mr-2" />
                   <span>Thêm</span>
                 </Button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </CardContent>
       </Card>

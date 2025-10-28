@@ -68,7 +68,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <Button 
             variant="outline" 
             size="icon" 
-            // Áp dụng nền mờ và trong suốt
             className="absolute top-3 right-3 bg-white/50 backdrop-blur-sm rounded-full w-8 h-8 border-none" 
             onClick={handleButtonClick}
           >
@@ -76,7 +75,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </Button>
         </div>
         <CardContent className="p-4 flex flex-col flex-grow">
-          <div className="flex items-center mb-2">
+          {/* Thêm space-x-1 để tăng khoảng cách giữa các ngôi sao */}
+          <div className="flex items-center mb-2 space-x-1">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}

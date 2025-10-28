@@ -111,7 +111,7 @@ const LearningHub = () => {
   return (
     <>
       <Header />
-      <main className="py-8">
+      <main className="py-8 bg-white">
         <div className="px-10 mx-auto max-w-screen-2xl">
           {/* Mobile Filter Button */}
           <MobileFilterButton

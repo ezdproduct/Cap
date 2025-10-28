@@ -3,6 +3,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FilterSidebar from "@/components/learning-hub/FilterSidebar";
 import CourseGrid from "@/components/learning-hub/CourseGrid";
+import MobileFilterButton from "@/components/learning-hub/MobileFilterButton";
 import { useCourses } from "@/hooks/useCourses";
 import { Course } from "@/lib/course";
 import {
@@ -111,61 +112,75 @@ const LearningHub = () => {
     <>
       <Header />
       <main className="py-8">
-        <div className="px-10 mx-auto max-w-screen-2xl grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8">
-          <div>
-            <FilterSidebar
-              filters={availableFilters}
-              selectedFilters={selectedFilters}
-              onFilterChange={handleFilterChange}
-              searchTerm={searchTerm}
-              onSearchChange={setSearchTerm}
-            />
-          </div>
-          <div className="flex flex-col justify-between">
-            <CourseGrid courses={filteredCourses} />
-            {totalPages > 1 && (
-              <Pagination className="mt-8">
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handlePageChange(Math.max(1, currentPage - 1));
-                      }}
-                      onMouseEnter={() => prefetchPage(currentPage - 1)}
-                      className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-                    />
-                  </PaginationItem>
-                  {[...Array(totalPages)].map((_, i) => (
-                    <PaginationItem key={i}>
-                      <PaginationLink
+        <div className="px-10 mx-auto max-w-screen-2xl">
+          {/* Mobile Filter Button */}
+          <MobileFilterButton
+            filters={availableFilters}
+            selectedFilters={selectedFilters}
+            onFilterChange={handleFilterChange}
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-8">
+            {/* Desktop Sidebar */}
+            <div className="hidden lg:block">
+              <FilterSidebar
+                filters={availableFilters}
+                selectedFilters={selectedFilters}
+                onFilterChange={handleFilterChange}
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+              />
+            </div>
+            
+            {/* Course Grid */}
+            <div className="flex flex-col justify-between">
+              <CourseGrid courses={filteredCourses} />
+              {totalPages > 1 && (
+                <Pagination className="mt-8">
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious
                         href="#"
-                        isActive={currentPage === i + 1}
                         onClick={(e) => {
                           e.preventDefault();
-                          handlePageChange(i + 1);
+                          handlePageChange(Math.max(1, currentPage - 1));
                         }}
-                        onMouseEnter={() => prefetchPage(i + 1)}
-                      >
-                        {i + 1}
-                      </PaginationLink>
+                        onMouseEnter={() => prefetchPage(currentPage - 1)}
+                        className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                      />
                     </PaginationItem>
-                  ))}
-                  <PaginationItem>
-                    <PaginationNext
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handlePageChange(Math.min(totalPages, currentPage + 1));
-                      }}
-                      onMouseEnter={() => prefetchPage(currentPage + 1)}
-                      className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            )}
+                    {[...Array(totalPages)].map((_, i) => (
+                      <PaginationItem key={i}>
+                        <PaginationLink
+                          href="#"
+                          isActive={currentPage === i + 1}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handlePageChange(i + 1);
+                          }}
+                          onMouseEnter={() => prefetchPage(i + 1)}
+                        >
+                          {i + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    <PaginationItem>
+                      <PaginationNext
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handlePageChange(Math.min(totalPages, currentPage + 1));
+                        }}
+                        onMouseEnter={() => prefetchPage(currentPage + 1)}
+                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              )}
+            </div>
           </div>
         </div>
       </main>

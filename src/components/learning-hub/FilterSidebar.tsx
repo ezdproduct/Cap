@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button"; // <-- Đã thêm import
 
 interface FilterSidebarProps {
   filters: {
@@ -20,6 +21,8 @@ interface FilterSidebarProps {
   onFilterChange: (type: any, value: string) => void;
   searchTerm: string;
   onSearchChange: (value: string) => void;
+  // Thêm prop để xử lý việc đóng/áp dụng bộ lọc trên mobile
+  onApply?: () => void; 
 }
 
 const FilterGroup: React.FC<{
@@ -54,9 +57,10 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   onFilterChange,
   searchTerm,
   onSearchChange,
+  onApply,
 }) => {
   return (
-    <aside className="h-full lg:sticky top-24 space-y-8">
+    <aside className="h-full space-y-8 p-4 lg:p-0">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <Input
@@ -95,6 +99,15 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         selected={selectedFilters.prices}
         onChange={onFilterChange}
       />
+      
+      {/* Nút áp dụng chỉ hiển thị trên mobile (khi được bọc trong Sheet) */}
+      {onApply && (
+        <div className="pt-4 border-t lg:hidden">
+          <Button onClick={onApply} className="w-full bg-cap-purple hover:bg-cap-purple/90">
+            Áp dụng bộ lọc
+          </Button>
+        </div>
+      )}
     </aside>
   );
 };

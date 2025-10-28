@@ -84,13 +84,23 @@ const CourseCard: React.FC<CourseCardProps> = ({
               </Button>
             ) : (
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-                <div>
+                {/* Điều chỉnh phần hiển thị giá */}
+                <div className="flex items-center gap-2">
                   {discountedPrice && (
-                    <p className="text-sm line-through text-muted-foreground">{price}</p>
+                    <p className="text-sm line-through text-muted-foreground font-normal">
+                      {price}
+                    </p>
                   )}
-                  <p className="text-lg font-bold text-cap-dark-blue">{discountedPrice || price}</p>
+                  <p className="text-lg font-bold text-cap-dark-blue">
+                    {discountedPrice || price}
+                  </p>
                 </div>
-                <Button variant="outline" className="w-full sm:w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors" onClick={handleButtonClick}>
+                {/* Nút Thêm */}
+                <Button 
+                  variant="outline" 
+                  className="w-full sm:w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors" 
+                  onClick={handleButtonClick}
+                >
                   <ShoppingCart className="h-4 w-4 sm:mr-2" />
                   <span>Thêm</span>
                 </Button>

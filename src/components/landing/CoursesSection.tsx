@@ -23,6 +23,11 @@ function chunk<T>(array: T[], size: number): T[][] {
   return chunked_arr;
 }
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+};
+
 const CoursesSection = () => {
   const [activeFilter, setActiveFilter] = useState(filters[0]);
   const { data } = useCourses({ page: 1, limit: 9 });
@@ -74,28 +79,36 @@ const CoursesSection = () => {
                     <CarouselItem key={index} className="basis-1/2 pl-2">
                       <div className="space-y-2">
                         {chunk.map((course) => (
-                           <div key={course.id} className="p-1">
+                           <motion.div key={course.id} className="p-1" variants={itemVariants} initial="hidden" animate="visible">
                              <CourseCard
                                {...course}
                                categories={course.categories.join(", ")}
                              />
-                           </div>
+                           </motion.div>
                         ))}
                       </div>
                     </CarouselItem>
                   ))
                 ) : (
-                  filteredCourses.map((course) => (
+                  filteredCourses.map((course, index) => (
                     <CarouselItem
                       key={course.id}
                       className="basis-1/2 lg:basis-1/3 pl-2"
                     >
-                      <div className="p-1">
+                      <motion.div 
+                        className="p-1" 
+                        variants={itemVariants} 
+                        initial="hidden" 
+                        animate="visible"
+                        // Thêm độ trễ nhỏ dựa trên index để tạo hiệu ứng staggered
+                        custom={index}
+                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                      >
                         <CourseCard
                           {...course}
                           categories={course.categories.join(", ")}
                         />
-                      </div>
+                      </motion.div>
                     </CarouselItem>
                   ))
                 )}

@@ -68,7 +68,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <Button 
             variant="outline" 
             size="icon" 
-            className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 border-none" 
+            // Áp dụng nền mờ và trong suốt
+            className="absolute top-3 right-3 bg-white/50 backdrop-blur-sm rounded-full w-8 h-8 border-none" 
             onClick={handleButtonClick}
           >
             <Bookmark className="h-4 w-4 text-gray-600" />
@@ -81,8 +82,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 key={i}
                 className={`h-5 w-5 ${
                   i < rating 
-                    ? "text-yellow-500 fill-yellow-500" // Đã đánh giá: viền và fill vàng
-                    : "text-yellow-500" // Chưa đánh giá: viền vàng, fill mặc định (trong suốt)
+                    ? "text-yellow-500 fill-yellow-500"
+                    : "text-yellow-500"
                 }`}
               />
             ))}

@@ -21,6 +21,19 @@ interface CourseCardProps {
   product_id?: number;
 }
 
+// Hàm tiện ích để tạo slug đơn giản từ tiêu đề
+const createSlug = (title: string) => {
+  return title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+};
+
 const CourseCard: React.FC<CourseCardProps> = ({
   id,
   title,
@@ -36,6 +49,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   const { addToCart, isAddingToCart } = useCartContext();
   const isFree = price === "0đ";
+  
+  // Tạo URL bên ngoài
+  const courseSlug = createSlug(title);
+  const externalUrl = `https://course.learnwithcap.com/courses/${courseSlug}`;
 
   const handleAddToCartClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -54,7 +71,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   };
 
   return (
-    <Link to={`/courses/${id}`} className="h-full block group">
+    <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="h-full block group">
       <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300">
         <div className="relative">
           <img src={image} alt={title} className="w-full h-48 object-cover" loading="lazy" />
@@ -134,7 +151,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </div>
         </CardContent>
       </Card>
-    </Link>
+    </a>
   );
 };
 

@@ -79,8 +79,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                // Đổi màu vàng thành 500 để nổi bật hơn
-                className={`h-5 w-5 ${i < rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"}`}
+                className={`h-5 w-5 ${
+                  i < rating 
+                    ? "text-yellow-500 fill-yellow-500" // Đã đánh giá: viền và fill vàng
+                    : "text-yellow-500" // Chưa đánh giá: viền vàng, fill mặc định (trong suốt)
+                }`}
               />
             ))}
           </div>

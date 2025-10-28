@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Bookmark, Clock, Star, ShoppingCart } from "lucide-react";
-import CourseTitle from "./CourseTitle"; // Import component mới
+import CourseTitle from "./CourseTitle";
+import { useCartContext } from "../../context/CartContext";
 
 interface CourseCardProps {
   id: number;
@@ -17,6 +18,7 @@ interface CourseCardProps {
   price: string;
   discountedPrice?: string;
   categories: string;
+  product_id?: number;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -30,14 +32,25 @@ const CourseCard: React.FC<CourseCardProps> = ({
   price,
   discountedPrice,
   categories,
+  product_id,
 }) => {
+  const { addToCart, isAddingToCart } = useCartContext();
   const isFree = price === "0đ";
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddToCartClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    // Logic thêm vào giỏ hàng hoặc đăng ký có thể được thêm ở đây
-    console.log("Button clicked for course:", title);
+    if (product_id) {
+      addToCart(product_id);
+    } else {
+      console.error("Không có product_id để thêm vào giỏ hàng.");
+    }
+  };
+
+  const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Bookmark clicked for course:", title);
   };
 
   return (
@@ -52,7 +65,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             variant="outline" 
             size="icon" 
             className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 border-none" 
-            onClick={handleButtonClick}
+            onClick={handleBookmarkClick}
           >
             <Bookmark className="h-4 w-4 text-gray-600" />
           </Button>
@@ -67,7 +80,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
             ))}
           </div>
           
-          {/* Sử dụng CourseTitle component mới */}
           <CourseTitle title={title} />
 
           <div className="flex items-center text-sm text-muted-foreground mb-4">
@@ -86,7 +98,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
           
           <div className="mt-auto pt-4 border-t">
             <div className="flex items-center justify-between gap-2">
-              {/* Phần hiển thị Giá / Miễn phí */}
               <div className="flex items-center gap-2 flex-shrink-0">
                 {isFree ? (
                   <p className="text-lg font-bold text-cap-dark-blue">Miễn phí</p>
@@ -104,25 +115,21 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 )}
               </div>
               
-              {/* Nút hành động */}
-              {isFree ? (
-                <Button 
-                  variant="outline" 
-                  className="w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white flex-shrink-0" 
-                  onClick={handleButtonClick}
-                >
+              <Button 
+                variant="outline" 
+                className="w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white flex-shrink-0" 
+                onClick={handleAddToCartClick}
+                disabled={!product_id || isAddingToCart}
+              >
+                {isFree ? (
                   <span>Đăng ký</span>
-                </Button>
-              ) : (
-                <Button 
-                  variant="outline" 
-                  className="w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white flex-shrink-0" 
-                  onClick={handleButtonClick}
-                >
-                  <ShoppingCart className="h-4 w-4 sm:mr-2" />
-                  <span>Thêm</span>
-                </Button>
-              )}
+                ) : (
+                  <>
+                    <ShoppingCart className="h-4 w-4 sm:mr-2" />
+                    <span>Thêm</span>
+                  </>
+                )}
+              </Button>
             </div>
           </div>
         </CardContent>

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingSpinner from "./components/ui/LoadingSpinner";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AlertTriangle } from "lucide-react";
+import { CartProvider } from "./context/CartContext";
 
 // Skeletons
 import LearningHubSkeleton from "./pages/skeletons/LearningHubSkeleton";
@@ -32,44 +33,46 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Sonner />
-      <BrowserRouter>
-        <ErrorBoundary fallback={<ErrorFallback />}>
-          <Routes>
-            <Route 
-              path="/" 
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Index />
-                </Suspense>
-              } 
-            />
-            <Route 
-              path="/learning-hub" 
-              element={
-                <Suspense fallback={<LearningHubSkeleton />}>
-                  <LearningHub />
-                </Suspense>
-              } 
-            />
-            <Route 
-              path="/courses/:courseId" 
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <CourseDetail />
-                </Suspense>
-              } 
-            />
-            <Route 
-              path="*" 
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <NotFound />
-                </Suspense>
-              } 
-            />
-          </Routes>
-        </ErrorBoundary>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <ErrorBoundary fallback={<ErrorFallback />}>
+            <Routes>
+              <Route 
+                path="/" 
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Index />
+                  </Suspense>
+                } 
+              />
+              <Route 
+                path="/learning-hub" 
+                element={
+                  <Suspense fallback={<LearningHubSkeleton />}>
+                    <LearningHub />
+                  </Suspense>
+                } 
+              />
+              <Route 
+                path="/courses/:courseId" 
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <CourseDetail />
+                  </Suspense>
+                } 
+              />
+              <Route 
+                path="*" 
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <NotFound />
+                  </Suspense>
+                } 
+              />
+            </Routes>
+          </ErrorBoundary>
+        </BrowserRouter>
+      </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

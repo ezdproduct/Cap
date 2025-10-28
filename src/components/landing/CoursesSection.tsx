@@ -36,7 +36,6 @@ const CoursesSection = () => {
     );
   }, [courses, activeFilter]);
 
-  // Quay lại chunking 2 thẻ/slide trên mobile
   const mobileCourseChunks = useMemo(() => chunk(filteredCourses, 2), [filteredCourses]);
 
   return (
@@ -75,7 +74,7 @@ const CoursesSection = () => {
                     <CarouselItem key={index} className="basis-1/2 pl-2">
                       <div className="space-y-2">
                         {chunk.map((course) => (
-                           <div key={course.id} className="p-1">
+                           <div key={course.id} className="p-1 aspect-[1/1.04]">
                              <CourseCard
                                {...course}
                                categories={course.categories.join(", ")}
@@ -91,7 +90,7 @@ const CoursesSection = () => {
                       key={course.id}
                       className="basis-1/2 lg:basis-1/3 pl-2"
                     >
-                      <div className="p-1">
+                      <div className="p-1 aspect-[1/1.04]">
                         <CourseCard
                           {...course}
                           categories={course.categories.join(", ")}

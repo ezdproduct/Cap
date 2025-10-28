@@ -61,10 +61,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
     <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="h-full block group">
       <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300">
         <div className="relative">
-          {/* Sử dụng aspect-ratio để kiểm soát tỷ lệ ảnh (gần 1:1) */}
-          <div className="aspect-[1.04/1] w-full">
-            <img src={image} alt={title} className="w-full h-full object-cover" loading="lazy" />
-          </div>
+          {/* Loại bỏ aspect ratio, quay lại chiều cao cố định cho ảnh */}
+          <img src={image} alt={title} className="w-full h-48 object-cover" loading="lazy" />
           <div className="absolute top-3 left-3 bg-cap-purple text-white px-3 py-1 text-xs font-semibold rounded-full">
             {level}
           </div>

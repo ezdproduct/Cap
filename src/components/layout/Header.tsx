@@ -60,7 +60,8 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-2">
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
               <Button 
-                className="bg-cap-dark-blue hover:bg-cap-purple text-white rounded-md transition-colors text-base px-4 py-2 h-auto"
+                // Điều chỉnh padding để khớp với chiều cao của các mục điều hướng (py-1.5)
+                className="bg-cap-dark-blue hover:bg-cap-purple text-white rounded-md transition-colors text-base px-4 py-1.5 h-auto"
               >
                 Đăng nhập
               </Button>

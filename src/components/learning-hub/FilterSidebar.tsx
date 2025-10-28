@@ -39,7 +39,7 @@ const FilterGroup: React.FC<{
           key={option}
           onClick={() => onChange(type, option)}
           className={cn(
-            "rounded-full px-3 py-1.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-none",
+            "rounded-full px-3 py-1.5 text-sm transition-colors focus:outline-none border-none",
             selected.includes(option)
               ? "bg-cap-sky-blue text-white hover:bg-cap-sky-blue/90"
               : "bg-gray-100 text-gray-800 hover:bg-gray-200"

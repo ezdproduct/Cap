@@ -122,7 +122,7 @@ const LearningHub = () => {
             onSearchChange={setSearchTerm}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8">
             {/* Desktop Sidebar */}
             <div className="hidden lg:block">
               <FilterSidebar

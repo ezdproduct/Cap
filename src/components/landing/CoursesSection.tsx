@@ -88,7 +88,7 @@ const CoursesSection = () => {
                   filteredCourses.map((course) => (
                     <CarouselItem
                       key={course.id}
-                      className="basis-1/2 lg:basis-1/3 2xl:basis-1/4 pl-2"
+                      className="basis-1/2 lg:basis-1/3 xl:basis-1/4 pl-2"
                     >
                       <div className="p-1">
                         <CourseCard

@@ -63,7 +63,7 @@ const FeaturesSection = () => {
         </div>
 
         {/* Bottom Section: Feature Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {solutions.map((solution, index) => (
             <FeatureItem key={index} icon={solution.icon} description={solution.description} />
           ))}

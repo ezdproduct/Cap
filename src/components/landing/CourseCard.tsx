@@ -61,7 +61,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
     <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="h-full block group">
       <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300">
         <div className="relative">
-          {/* Quay lại chiều cao cố định h-48 */}
           <img src={image} alt={title} className="w-full h-48 object-cover" loading="lazy" />
           <div className="absolute top-3 left-3 bg-cap-purple text-white px-3 py-1 text-xs font-semibold rounded-full">
             {level}
@@ -80,7 +79,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className={`h-5 w-5 ${i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
+                // Đổi màu vàng thành 500 để nổi bật hơn
+                className={`h-5 w-5 ${i < rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"}`}
               />
             ))}
           </div>

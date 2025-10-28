@@ -33,7 +33,7 @@ const MobileFilterButton: React.FC<MobileFilterButtonProps> = ({
           Bộ lọc
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="h-[80vh]">
         <DrawerHeader>
           <DrawerTitle>Bộ lọc khóa học</DrawerTitle>
         </DrawerHeader>

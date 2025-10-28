@@ -61,7 +61,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   onApply,
 }) => {
   return (
-    <aside className="h-full space-y-8 p-4 lg:p-0">
+    <aside className="h-full space-y-8 p-4 lg:p-0 lg:sticky lg:top-24">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <Input

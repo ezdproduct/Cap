@@ -6,19 +6,7 @@ import { useCourse } from "@/hooks/useCourse";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, BarChart2, User, Star, ShoppingCart } from "lucide-react";
-
-// Helper function to create a slug from the title
-const createSlug = (title: string) => {
-  return title
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-};
+import { createSlug } from "@/lib/utils";
 
 const CourseDetail = () => {
   const { courseId } = useParams<{ courseId: string }>();

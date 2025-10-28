@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Bookmark, Clock, Star, ShoppingCart } from "lucide-react";
 import CourseTitle from "./CourseTitle";
+import { createSlug } from "@/lib/utils";
 
 interface CourseCardProps {
   id: number;
@@ -18,19 +19,6 @@ interface CourseCardProps {
   categories: string;
   product_id?: number;
 }
-
-// Hàm tiện ích để tạo slug đơn giản từ tiêu đề
-const createSlug = (title: string) => {
-  return title
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-};
 
 const CourseCard: React.FC<CourseCardProps> = ({
   id,
@@ -75,7 +63,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </Button>
         </div>
         <CardContent className="p-4 flex flex-col flex-grow">
-          {/* Thêm space-x-1 để tăng khoảng cách giữa các ngôi sao */}
           <div className="flex items-center mb-2 space-x-1">
             {[...Array(5)].map((_, i) => (
               <Star

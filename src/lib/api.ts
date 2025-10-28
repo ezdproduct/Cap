@@ -117,14 +117,10 @@ export const fetchCart = async () => {
 };
 
 export const addToCart = async (productId: number) => {
-  // Sử dụng URLSearchParams để thêm id và quantity vào query string
-  const url = new URL(`${WC_STORE_API_URL}/cart/add-item`);
-  url.searchParams.append('id', String(productId));
-  url.searchParams.append('quantity', '1'); // Cố định quantity = 1
-
-  const response = await fetch(url.toString(), {
+  const response = await fetch(`${WC_STORE_API_URL}/cart/add-item`, {
     method: 'POST',
-    // Không cần Content-Type: application/json vì không gửi body
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: productId, quantity: 1 }),
     credentials: 'include',
   });
   

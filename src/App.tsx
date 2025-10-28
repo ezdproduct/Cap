@@ -14,6 +14,7 @@ import LearningHubSkeleton from "./pages/skeletons/LearningHubSkeleton";
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const LearningHub = lazy(() => import("./pages/LearningHub"));
+const CourseDetail = lazy(() => import("./pages/CourseDetail"));
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,14 @@ const App = () => (
               element={
                 <Suspense fallback={<LearningHubSkeleton />}>
                   <LearningHub />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="/courses/:courseId" 
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <CourseDetail />
                 </Suspense>
               } 
             />

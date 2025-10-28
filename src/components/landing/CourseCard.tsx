@@ -1,22 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Bookmark, Clock, Star, ShoppingCart } from "lucide-react";
-
-// Helper function to create a URL-friendly slug from a string
-const createSlug = (text: string) => {
-  return text
-    .toLowerCase()
-    .replace(/đ/g, 'd') // Handle Vietnamese character
-    .normalize('NFD') // Normalize to decompose combined graphemes
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
-    .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, ''); // Trim - from end of text
-};
 
 interface CourseCardProps {
   id: number;
@@ -44,18 +31,23 @@ const CourseCard: React.FC<CourseCardProps> = ({
   categories,
 }) => {
   const isFree = price === "0đ";
-  const courseSlug = createSlug(title);
-  const courseUrl = `https://course.learnwithcap.com/courses/${courseSlug}/`;
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Logic thêm vào giỏ hàng hoặc đăng ký có thể được thêm ở đây
+    console.log("Button clicked for course:", title);
+  };
 
   return (
-    <a href={courseUrl} target="_blank" rel="noopener noreferrer" className="h-full block">
-      <Card className="overflow-hidden border h-full flex flex-col bg-white hover:shadow-lg transition-shadow duration-300">
+    <Link to={`/courses/${id}`} className="h-full block group">
+      <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300">
         <div className="relative">
           <img src={image} alt={title} className="w-full h-48 object-cover" loading="lazy" />
           <div className="absolute top-3 left-3 bg-cap-purple text-white px-3 py-1 text-xs font-semibold rounded-full">
             {level}
           </div>
-          <Button variant="outline" size="icon" className="absolute top-3 right-3 bg-white/80 rounded-full w-8 h-8 border-none">
+          <Button variant="outline" size="icon" className="absolute top-3 right-3 bg-white/80 rounded-full w-8 h-8 border-none" onClick={handleButtonClick}>
             <Bookmark className="h-4 w-4 text-gray-600" />
           </Button>
         </div>
@@ -68,7 +60,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
               />
             ))}
           </div>
-          <h3 className="text-lg font-bold mb-2 text-cap-dark-blue h-14 overflow-hidden">
+          <h3 className="text-lg font-bold mb-2 text-cap-dark-blue h-14 overflow-hidden group-hover:text-cap-purple transition-colors">
             {title}
           </h3>
           <div className="flex items-center text-sm text-muted-foreground mb-4">
@@ -87,7 +79,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           
           <div className="mt-auto pt-4 border-t">
             {isFree ? (
-              <Button variant="outline" className="w-full border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors">
+              <Button variant="outline" className="w-full border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors" onClick={handleButtonClick}>
                 Đăng ký khóa học
               </Button>
             ) : (
@@ -98,7 +90,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                   )}
                   <p className="text-lg font-bold text-cap-dark-blue">{discountedPrice || price}</p>
                 </div>
-                <Button variant="outline" className="w-full sm:w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors">
+                <Button variant="outline" className="w-full sm:w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors" onClick={handleButtonClick}>
                   <ShoppingCart className="h-4 w-4 sm:mr-2" />
                   <span>Thêm</span>
                 </Button>
@@ -107,7 +99,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </div>
         </CardContent>
       </Card>
-    </a>
+    </Link>
   );
 };
 

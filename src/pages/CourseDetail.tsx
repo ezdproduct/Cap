@@ -6,15 +6,25 @@ import { useCourse } from "@/hooks/useCourse";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, BarChart2, User, Star, ShoppingCart } from "lucide-react";
+import { useCartContext } from "@/context/CartContext";
 
 const CourseDetail = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const { data: course } = useCourse(courseId);
+  const { addToCart, isAddingToCart } = useCartContext();
 
   if (!course) {
     // This case should ideally not be hit due to Suspense, but it's a good safeguard.
     return <div>Đang tải chi tiết khóa học...</div>;
   }
+
+  const handleAddToCartClick = () => {
+    if (course.product_id) {
+      addToCart(course.product_id);
+    } else {
+      console.error("Không có product_id để thêm vào giỏ hàng.");
+    }
+  };
 
   return (
     <>
@@ -38,7 +48,11 @@ const CourseDetail = () => {
                     </span>
                   )}
                 </div>
-                <Button className="w-full bg-cap-purple hover:bg-cap-purple/90 text-lg py-6">
+                <Button 
+                  className="w-full bg-cap-purple hover:bg-cap-purple/90 text-lg py-6"
+                  onClick={handleAddToCartClick}
+                  disabled={!course.product_id || isAddingToCart}
+                >
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   Thêm vào giỏ hàng
                 </Button>

@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Bookmark, Clock, Star, ShoppingCart } from "lucide-react";
+import CourseTitle from "./CourseTitle"; // Import component mới
 
 interface CourseCardProps {
   id: number;
@@ -65,9 +66,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
               />
             ))}
           </div>
-          <h3 className="text-lg font-bold mb-2 text-cap-dark-blue group-hover:text-cap-purple transition-colors line-clamp-2">
-            {title}
-          </h3>
+          
+          {/* Sử dụng CourseTitle component mới */}
+          <CourseTitle title={title} />
+
           <div className="flex items-center text-sm text-muted-foreground mb-4">
             <Clock className="h-4 w-4 mr-1.5" />
             <span>{duration}</span>

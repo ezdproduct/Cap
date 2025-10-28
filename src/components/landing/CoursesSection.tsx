@@ -39,9 +39,9 @@ const CoursesSection = () => {
   const mobileCourseChunks = useMemo(() => chunk(filteredCourses, 2), [filteredCourses]);
 
   return (
-    <section id="courses" className="pt-6 md:pt-8 pb-12 md:pb-16 bg-white">
+    <section id="courses" className="pt-0 pb-12 md:pb-16 bg-white">
       <div className="px-4 sm:px-10 mx-auto max-w-screen-2xl">
-        <div className="flex justify-center mb-8"> {/* Giảm mb-12 thành mb-8 */}
+        <div className="flex justify-center mb-8">
           <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-1 bg-gray-100 p-1 rounded-full overflow-x-auto scrollbar-hide">
             {filters.map((filter) => (
               <button

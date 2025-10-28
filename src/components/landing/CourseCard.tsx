@@ -20,6 +20,19 @@ interface CourseCardProps {
   product_id?: number;
 }
 
+// Hàm tiện ích để tạo slug đơn giản từ tiêu đề
+const createSlug = (title: string) => {
+  return title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+};
+
 const CourseCard: React.FC<CourseCardProps> = ({
   id,
   title,
@@ -47,7 +60,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   return (
     <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="h-full block group">
-      <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300">
+      <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300 rounded-15px">
         <div className="relative">
           <img src={image} alt={title} className="w-full h-48 object-cover" loading="lazy" />
           <div className="absolute top-3 left-3 bg-cap-purple text-white px-3 py-1 text-xs font-semibold rounded-full">

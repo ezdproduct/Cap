@@ -79,7 +79,7 @@ const CoursesSection = () => {
                     <CarouselItem key={index} className="basis-1/2 pl-2">
                       <div className="space-y-2">
                         {chunk.map((course) => (
-                           <motion.div key={course.id} className="p-1" variants={itemVariants} initial="hidden" animate="visible">
+                           <motion.div key={course.id} className="p-1">
                              <CourseCard
                                {...course}
                                categories={course.categories.join(", ")}
@@ -100,7 +100,6 @@ const CoursesSection = () => {
                         variants={itemVariants} 
                         initial="hidden" 
                         animate="visible"
-                        // Thêm độ trễ nhỏ dựa trên index để tạo hiệu ứng staggered
                         custom={index}
                         transition={{ duration: 0.4, delay: index * 0.05 }}
                       >

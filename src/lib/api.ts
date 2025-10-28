@@ -10,8 +10,6 @@ if (!TUTOR_API_URL || !TUTOR_AUTH_HEADER || !WC_API_URL || !WC_AUTH_HEADER || !W
   throw new Error("Vui lòng định nghĩa đầy đủ các biến API trong tệp .env của bạn");
 }
 
-// ... (các hàm fetchTutorCourses, fetchTutorCourseById, fetchAllWooCommerceProducts giữ nguyên)
-
 // Hàm này chỉ lấy dữ liệu thô từ Tutor LMS
 export const fetchTutorCourses = async ({ page = 1, limit = 9 }) => {
     const url = new URL(TUTOR_API_URL);
@@ -119,12 +117,17 @@ export const fetchCart = async () => {
 };
 
 export const addToCart = async (productId: number) => {
-  const response = await fetch(`${WC_STORE_API_URL}/cart/add-item`, {
+  // Sử dụng URLSearchParams để thêm id và quantity vào query string
+  const url = new URL(`${WC_STORE_API_URL}/cart/add-item`);
+  url.searchParams.append('id', String(productId));
+  url.searchParams.append('quantity', '1'); // Cố định quantity = 1
+
+  const response = await fetch(url.toString(), {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id: productId, quantity: 1 }),
+    // Không cần Content-Type: application/json vì không gửi body
     credentials: 'include',
   });
+  
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.message || 'Không thể thêm vào giỏ hàng.');

@@ -93,7 +93,7 @@ export const mapApiDataToCourse = (courseData: any, wcProduct?: any): Course => 
         id: courseData.ID,
         title: courseData.post_title,
         level: level,
-        image: courseData.thumbnail_url || "https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        image: courseData.thumbnail_url || "https://course.learnwithcap.com/wp-content/uploads/2025/10/danist-soh-8Gg2Ne_uTcM-unsplash-scaled-1.webp",
         rating: Math.round(courseData.ratings?.rating_avg || 0),
         duration: duration,
         instructor: courseData.post_author?.display_name || "CAP",

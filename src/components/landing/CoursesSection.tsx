@@ -79,7 +79,7 @@ const CoursesSection = () => {
                     <CarouselItem key={index} className="basis-1/2 pl-2">
                       <div className="space-y-2">
                         {chunk.map((course) => (
-                           <motion.div key={course.id} className="p-1">
+                           <motion.div key={course.id} className="p-1" variants={itemVariants} initial="hidden" animate="visible">
                              <CourseCard
                                {...course}
                                categories={course.categories.join(", ")}

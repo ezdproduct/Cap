@@ -50,7 +50,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <Button 
             variant="outline" 
             size="icon" 
-            // Đổi bg-white/80 thành bg-white
             className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 border-none" 
             onClick={handleButtonClick}
           >
@@ -85,7 +84,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
           
           <div className="mt-auto pt-4 border-t">
             {isFree ? (
-              <Button variant="outline" className="w-full border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors" onClick={handleButtonClick}>
+              <Button 
+                variant="outline" 
+                className="w-full border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white" 
+                onClick={handleButtonClick}
+              >
                 Đăng ký khóa học
               </Button>
             ) : (
@@ -104,7 +107,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 {/* Nút Thêm */}
                 <Button 
                   variant="outline" 
-                  className="w-full sm:w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors" 
+                  className="w-full sm:w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white" 
                   onClick={handleButtonClick}
                 >
                   <ShoppingCart className="h-4 w-4 sm:mr-2" />

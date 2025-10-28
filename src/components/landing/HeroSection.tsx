@@ -2,7 +2,7 @@ import React from "react";
 
 const HeroSection = () => {
   return (
-    <section id="home" className="pt-4 pb-12 bg-background">
+    <section id="home" className="pt-4 pb-12 bg-white">
       <div className="px-4 sm:px-10 mx-auto max-w-screen-2xl">
         <div className="relative w-full overflow-hidden rounded-2xl">
           <div className="pt-[43.75%] relative">

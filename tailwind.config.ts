@@ -76,6 +76,7 @@ export default {
         },
         // Custom CAP Colors
         'cap-dark-blue': '#002A4C',
+        'cap-navy': '#063457',
         'cap-sky-blue': '#59B4E9',
         'cap-purple': '#671D9D',
       },

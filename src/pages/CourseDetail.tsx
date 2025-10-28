@@ -19,7 +19,7 @@ const CourseDetail = () => {
   return (
     <>
       <Header />
-      <main className="bg-gray-50 py-8 sm:py-12">
+      <main className="bg-background py-8 sm:py-12">
         <div className="px-4 sm:px-10 mx-auto max-w-screen-2xl grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           {/* Sidebar / Purchase Card - Appears first on mobile */}
           <div className="lg:col-span-1 lg:order-last lg:sticky top-24">

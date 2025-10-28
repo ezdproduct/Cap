@@ -1,9 +1,9 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Search } from "lucide-react";
-import { Button } from "@/components/ui/button"; // <-- Đã thêm import
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface FilterSidebarProps {
   filters: {
@@ -21,7 +21,6 @@ interface FilterSidebarProps {
   onFilterChange: (type: any, value: string) => void;
   searchTerm: string;
   onSearchChange: (value: string) => void;
-  // Thêm prop để xử lý việc đóng/áp dụng bộ lọc trên mobile
   onApply?: () => void; 
 }
 
@@ -34,18 +33,20 @@ const FilterGroup: React.FC<{
 }> = ({ title, type, options, selected, onChange }) => (
   <div>
     <h3 className="text-h4 font-semibold mb-4 text-gray-800">{title}</h3>
-    <div className="space-y-3">
+    <div className="flex flex-wrap gap-2">
       {options.map((option) => (
-        <div key={option} className="flex items-center space-x-3">
-          <Checkbox
-            id={`${type}-${option}`}
-            checked={selected.includes(option)}
-            onCheckedChange={() => onChange(type, option)}
-          />
-          <Label htmlFor={`${type}-${option}`} className="font-normal text-gray-700 cursor-pointer">
-            {option}
-          </Label>
-        </div>
+        <button
+          key={option}
+          onClick={() => onChange(type, option)}
+          className={cn(
+            "rounded-full border px-3 py-1.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+            selected.includes(option)
+              ? "bg-cap-dark-blue text-white border-cap-dark-blue hover:bg-cap-navy"
+              : "bg-white text-cap-dark-blue border-gray-300 hover:bg-gray-100 hover:border-cap-sky-blue"
+          )}
+        >
+          {option}
+        </button>
       ))}
     </div>
   </div>
@@ -100,7 +101,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         onChange={onFilterChange}
       />
       
-      {/* Nút áp dụng chỉ hiển thị trên mobile (khi được bọc trong Sheet) */}
       {onApply && (
         <div className="pt-4 border-t lg:hidden">
           <Button onClick={onApply} className="w-full bg-cap-purple hover:bg-cap-purple/90">

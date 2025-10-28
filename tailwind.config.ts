@@ -19,6 +19,14 @@ export default {
       },
     },
     extend: {
+      fontSize: {
+        'h1': '2.25rem',    // 36px
+        'h2': '1.875rem',   // 30px
+        'h3': '1.5rem',     // 24px
+        'h4': '1rem',       // 16px
+        'body': '1rem',     // 16px
+        'caption': '0.75rem', // 12px
+      },
       fontFamily: {
         sans: ['"Be Vietnam Pro"', ...defaultTheme.fontFamily.sans],
       },

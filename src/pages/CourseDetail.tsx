@@ -58,7 +58,7 @@ const CourseDetail = () => {
 
           {/* Main Content - Appears second on mobile */}
           <div className="lg:col-span-2 bg-white p-6 sm:p-8 rounded-lg shadow-sm">
-            <h1 className="text-3xl sm:text-4xl font-bold text-cap-dark-blue mb-4">{course.title}</h1>
+            <h1 className="text-h2 sm:text-h1 font-bold text-cap-dark-blue mb-4">{course.title}</h1>
             <div className="flex items-center space-x-6 text-gray-600 mb-6">
               <div className="flex items-center">
                 <User className="w-4 h-4 mr-2" />

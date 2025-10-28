@@ -58,7 +58,7 @@ const Footer = () => {
         </div>
       </div>
       
-      <div className="px-4 sm:px-10 mx-auto max-w-screen-2xl py-4 text-center text-sm">
+      <div className="px-4 sm:px-10 mx-auto max-w-screen-2xl py-4 text-center text-caption">
         <p>&copy; Bản quyền {new Date().getFullYear()} thuộc về CAP</p>
       </div>
     </footer>

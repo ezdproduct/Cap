@@ -31,7 +31,7 @@ const FeatureItem = ({ icon: Icon, description }: { icon: LucideIcon; descriptio
         <Icon className="h-6 w-6 text-white" />
       </div>
     </div>
-    <p className="text-base text-gray-200 flex-grow">{description}</p>
+    <p className="text-body text-gray-200 flex-grow">{description}</p>
   </div>
 );
 
@@ -46,7 +46,7 @@ const FeaturesSection = () => {
             <span className="inline-block bg-cap-sky-blue text-white px-3 py-1 rounded-full text-sm font-semibold w-fit">
               GIẢI PHÁP
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+            <h2 className="text-h1 md:text-5xl font-bold leading-tight">
               Giải pháp của CAP dành cho bạn
             </h2>
           </div>

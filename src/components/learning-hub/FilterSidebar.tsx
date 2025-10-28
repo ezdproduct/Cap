@@ -30,7 +30,7 @@ const FilterGroup: React.FC<{
   onChange: (type: any, value: string) => void;
 }> = ({ title, type, options, selected, onChange }) => (
   <div>
-    <h3 className="text-lg font-semibold mb-4 text-gray-800">{title}</h3>
+    <h3 className="text-h4 font-semibold mb-4 text-gray-800">{title}</h3>
     <div className="space-y-3">
       {options.map((option) => (
         <div key={option} className="flex items-center space-x-3">

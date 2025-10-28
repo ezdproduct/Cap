@@ -94,13 +94,15 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <Avatar className="h-6 w-6 mr-2 flex-shrink-0">
               <AvatarFallback className="bg-cap-sky-blue text-white text-xs">{instructor.charAt(0)}</AvatarFallback>
             </Avatar>
-            <div>
+            <div className="line-clamp-2 h-10">
               Tạo bởi <span className="font-medium text-gray-800">{instructor}</span>
               {categories && <span className="text-gray-500">, {categories}</span>}
             </div>
           </div>
           
-          <div className="mt-auto pt-4 border-t">
+          <div className="flex-grow" />
+
+          <div className="pt-4 border-t">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2 flex-shrink-0">
                 {isFree ? (

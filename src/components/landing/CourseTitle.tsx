@@ -17,6 +17,8 @@ const CourseTitle: React.FC<CourseTitleProps> = ({ title, className }) => {
         "line-clamp-2",
         // Khi hover, loại bỏ giới hạn dòng
         "group-hover:line-clamp-none",
+        // Đặt chiều cao cố định tương đương 2 dòng để căn chỉnh
+        "h-14",
         className
       )}
     >

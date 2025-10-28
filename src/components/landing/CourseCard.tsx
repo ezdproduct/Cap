@@ -91,7 +91,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 className="w-full border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white" 
                 onClick={handleButtonClick}
               >
-                Đăng ký khóa học
+                Đăng ký
               </Button>
             ) : (
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">

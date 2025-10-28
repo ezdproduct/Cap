@@ -14,12 +14,11 @@ const CourseGrid: React.FC<CourseGridProps> = ({ courses }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {courses.map((course) => (
-        <div key={course.id} className="aspect-[1/1.04] w-full">
-          <CourseCard 
-            {...course} 
-            categories={course.categories.join(', ')} 
-          />
-        </div>
+        <CourseCard 
+          key={course.id} 
+          {...course} 
+          categories={course.categories.join(', ')} 
+        />
       ))}
     </div>
   );

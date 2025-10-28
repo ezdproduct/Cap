@@ -57,7 +57,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const handleAddToCartClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    if (product_id) {
+    
+    if (isFree) {
+      // Đối với khóa học miễn phí, nút này chỉ cần chuyển hướng đến trang chi tiết bên ngoài
+      // (Hành vi này đã được xử lý bởi thẻ <a> cha, nhưng nếu người dùng muốn nút này làm gì đó khác,
+      // chúng ta cần thêm logic ở đây. Hiện tại, tôi sẽ để nó chuyển hướng như thẻ <a> cha.)
+      window.open(externalUrl, '_blank');
+    } else if (product_id) {
+      // Đối với khóa học trả phí, thêm vào giỏ hàng
       addToCart(product_id);
     } else {
       console.error("Không có product_id để thêm vào giỏ hàng.");
@@ -69,6 +76,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
     e.stopPropagation();
     console.log("Bookmark clicked for course:", title);
   };
+
+  // Xác định trạng thái disabled cho nút
+  const isButtonDisabled = !isFree && (!product_id || isAddingToCart);
 
   return (
     <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="h-full block group">
@@ -136,7 +146,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 variant="outline" 
                 className="w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white flex-shrink-0" 
                 onClick={handleAddToCartClick}
-                disabled={!product_id || isAddingToCart}
+                disabled={isButtonDisabled}
               >
                 {isFree ? (
                   <span>Đăng ký</span>

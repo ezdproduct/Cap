@@ -41,13 +41,13 @@ const CoursesSection = () => {
   return (
     <section id="courses" className="pt-6 md:pt-8 pb-12 md:pb-16 bg-white">
       <div className="px-4 sm:px-10 mx-auto max-w-screen-2xl">
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8"> {/* Giảm mb-12 thành mb-8 */}
           <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-1 bg-gray-100 p-1 rounded-full overflow-x-auto scrollbar-hide">
             {filters.map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-200 flex-shrink-0 ${
+                className={`rounded-full px-4 py-1.5 text-base font-medium transition-colors duration-200 flex-shrink-0 ${
                   activeFilter === filter
                     ? "bg-cap-purple text-white shadow-sm"
                     : "bg-transparent text-gray-600 hover:text-gray-900"

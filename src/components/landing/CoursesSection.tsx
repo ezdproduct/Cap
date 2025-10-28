@@ -100,6 +100,7 @@ const CoursesSection = () => {
                         variants={itemVariants} 
                         initial="hidden" 
                         animate="visible"
+                        // Thêm độ trễ nhỏ dựa trên index để tạo hiệu ứng staggered
                         custom={index}
                         transition={{ duration: 0.4, delay: index * 0.05 }}
                       >

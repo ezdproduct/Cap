@@ -20,19 +20,6 @@ interface CourseCardProps {
   product_id?: number;
 }
 
-// Hàm tiện ích để tạo slug đơn giản từ tiêu đề
-const createSlug = (title: string) => {
-  return title
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-};
-
 const CourseCard: React.FC<CourseCardProps> = ({
   id,
   title,
@@ -60,7 +47,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   return (
     <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="h-full block group">
-      <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300 rounded-15px">
+      <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300">
         <div className="relative">
           <img src={image} alt={title} className="w-full h-48 object-cover" loading="lazy" />
           <div className="absolute top-3 left-3 bg-cap-purple text-white px-3 py-1 text-xs font-semibold rounded-full">
@@ -144,55 +131,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </div>
         </CardContent>
       </Card>
-    </auda-write>
-
-<dyad-write path="src/components/learning-hub/CourseGrid.tsx" description="Giảm khoảng cách giữa các thẻ khóa học.">
-import React from "react";
-import CourseCard from "@/components/landing/CourseCard";
-import { Course } from "@/lib/course";
-import { motion } from "framer-motion";
-
-interface CourseGridProps {
-  courses: Course[];
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1, // Độ trễ giữa các thẻ
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const CourseGrid: React.FC<CourseGridProps> = ({ courses }) => {
-  if (courses.length === 0) {
-    return <p className="text-center col-span-full">Không tìm thấy khóa học nào.</p>;
-  }
-
-  return (
-    <motion.div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      {courses.map((course) => (
-        <motion.div key={course.id} variants={itemVariants}>
-          <CourseCard 
-            {...course} 
-            categories={course.categories.join(', ')} 
-          />
-        </motion.div>
-      ))}
-    </motion.div>
+    </a>
   );
 };
 
-export default CourseGrid;
+export default CourseCard;

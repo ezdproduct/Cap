@@ -6,24 +6,33 @@ import { useCourse } from "@/hooks/useCourse";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, BarChart2, User, Star, ShoppingCart } from "lucide-react";
-import { useCartContext } from "@/context/CartContext";
+
+// Helper function to create a slug from the title
+const createSlug = (title: string) => {
+  return title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+};
 
 const CourseDetail = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const { data: course } = useCourse(courseId);
-  const { addToCart, isAddingToCart } = useCartContext();
 
   if (!course) {
-    // This case should ideally not be hit due to Suspense, but it's a good safeguard.
     return <div>Đang tải chi tiết khóa học...</div>;
   }
 
-  const handleAddToCartClick = () => {
-    if (course.product_id) {
-      addToCart(course.product_id);
-    } else {
-      console.error("Không có product_id để thêm vào giỏ hàng.");
-    }
+  const courseSlug = createSlug(course.title);
+  const externalUrl = `https://course.learnwithcap.com/courses/${courseSlug}`;
+
+  const handleNavigateClick = () => {
+    window.open(externalUrl, '_blank');
   };
 
   return (
@@ -31,7 +40,7 @@ const CourseDetail = () => {
       <Header />
       <main className="bg-background py-8 sm:py-12">
         <div className="px-4 sm:px-10 mx-auto max-w-screen-2xl grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          {/* Sidebar / Purchase Card - Appears first on mobile */}
+          {/* Sidebar / Purchase Card */}
           <div className="lg:col-span-1 lg:order-last lg:sticky top-24">
             <Card>
               <CardHeader className="p-0">
@@ -50,11 +59,10 @@ const CourseDetail = () => {
                 </div>
                 <Button 
                   className="w-full bg-cap-purple hover:bg-cap-purple/90 text-lg py-6"
-                  onClick={handleAddToCartClick}
-                  disabled={!course.product_id || isAddingToCart}
+                  onClick={handleNavigateClick}
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
-                  Thêm vào giỏ hàng
+                  Xem chi tiết
                 </Button>
                 <ul className="mt-6 space-y-3 text-gray-700">
                   <li className="flex items-center">
@@ -70,7 +78,7 @@ const CourseDetail = () => {
             </Card>
           </div>
 
-          {/* Main Content - Appears second on mobile */}
+          {/* Main Content */}
           <div className="lg:col-span-2 bg-white p-6 sm:p-8 rounded-lg shadow-sm">
             <h1 className="text-h2 sm:text-h1 font-bold text-cap-dark-blue mb-4">{course.title}</h1>
             <div className="flex items-center space-x-6 text-gray-600 mb-6">

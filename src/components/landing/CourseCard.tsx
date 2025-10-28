@@ -1,11 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Bookmark, Clock, Star, ShoppingCart } from "lucide-react";
 import CourseTitle from "./CourseTitle";
-import { useCartContext } from "../../context/CartContext";
 
 interface CourseCardProps {
   id: number;
@@ -47,38 +45,17 @@ const CourseCard: React.FC<CourseCardProps> = ({
   categories,
   product_id,
 }) => {
-  const { addToCart, isAddingToCart } = useCartContext();
   const isFree = price === "0đ";
   
-  // Tạo URL bên ngoài
   const courseSlug = createSlug(title);
   const externalUrl = `https://course.learnwithcap.com/courses/${courseSlug}`;
 
-  const handleAddToCartClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    if (isFree) {
-      // Đối với khóa học miễn phí, nút này chỉ cần chuyển hướng đến trang chi tiết bên ngoài
-      // (Hành vi này đã được xử lý bởi thẻ <a> cha, nhưng nếu người dùng muốn nút này làm gì đó khác,
-      // chúng ta cần thêm logic ở đây. Hiện tại, tôi sẽ để nó chuyển hướng như thẻ <a> cha.)
-      window.open(externalUrl, '_blank');
-    } else if (product_id) {
-      // Đối với khóa học trả phí, thêm vào giỏ hàng
-      addToCart(product_id);
-    } else {
-      console.error("Không có product_id để thêm vào giỏ hàng.");
-    }
+    // Chuyển hướng đến URL bên ngoài khi nút được nhấp
+    window.open(externalUrl, '_blank');
   };
-
-  const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log("Bookmark clicked for course:", title);
-  };
-
-  // Xác định trạng thái disabled cho nút
-  const isButtonDisabled = !isFree && (!product_id || isAddingToCart);
 
   return (
     <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="h-full block group">
@@ -92,7 +69,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             variant="outline" 
             size="icon" 
             className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 border-none" 
-            onClick={handleBookmarkClick}
+            onClick={handleButtonClick}
           >
             <Bookmark className="h-4 w-4 text-gray-600" />
           </Button>
@@ -145,8 +122,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
               <Button 
                 variant="outline" 
                 className="w-auto border-cap-purple text-cap-purple hover:bg-cap-purple hover:text-white transition-colors bg-white flex-shrink-0" 
-                onClick={handleAddToCartClick}
-                disabled={isButtonDisabled}
+                onClick={handleButtonClick}
               >
                 {isFree ? (
                   <span>Đăng ký</span>

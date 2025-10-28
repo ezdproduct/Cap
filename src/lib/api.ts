@@ -105,28 +105,3 @@ export const mapApiDataToCourse = (courseData: any, wcProduct?: any): Course => 
         product_id: wcProduct?.id || courseData._tutor_course_product_id,
     };
 };
-
-// === CART API FUNCTIONS ===
-
-export const fetchCart = async () => {
-  const response = await fetch(`${WC_STORE_API_URL}/cart`, {
-    credentials: 'include',
-  });
-  if (!response.ok) throw new Error('Không thể lấy thông tin giỏ hàng.');
-  return response.json();
-};
-
-export const addToCart = async (productId: number) => {
-  const response = await fetch(`${WC_STORE_API_URL}/cart/add-item`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id: productId, quantity: 1 }),
-    credentials: 'include',
-  });
-  
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Không thể thêm vào giỏ hàng.');
-  }
-  return response.json();
-};

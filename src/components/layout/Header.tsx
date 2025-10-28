@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useCartContext } from "../../context/CartContext";
 
 const navItems = [
   { name: "Khóa học", href: "/learning-hub" },
@@ -14,8 +13,6 @@ const LOGIN_URL = "https://course.learnwithcap.com/tai-khoan/";
 
 const Header = () => {
   const location = useLocation();
-  const { cart } = useCartContext();
-  const itemCount = cart?.items_count || 0;
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white">
@@ -66,11 +63,6 @@ const Header = () => {
               className="relative text-gray-600 hover:bg-transparent hover:text-gray-900"
             >
               <ShoppingCart className="h-6 w-6" />
-              {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-cap-purple text-white text-xs">
-                  {itemCount}
-                </span>
-              )}
             </Button>
             
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
@@ -105,7 +97,7 @@ const Header = () => {
                   </a>
                   <Button variant="outline" className="flex items-center justify-center">
                     <ShoppingCart className="h-5 w-5 mr-2" />
-                    Giỏ hàng ({itemCount})
+                    Giỏ hàng
                   </Button>
                 </div>
               </SheetContent>

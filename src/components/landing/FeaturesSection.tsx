@@ -47,7 +47,7 @@ const FeaturesSection = () => {
               GIẢI PHÁP
             </span>
             <h2 className="text-h1 md:text-5xl font-bold leading-tight">
-              Giải pháp của CAP dành cho bạn
+              Giải pháp của CAP <br /> dành cho bạn
             </h2>
           </div>
           

@@ -60,7 +60,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
               />
             ))}
           </div>
-          <h3 className="text-lg font-bold mb-2 text-cap-dark-blue h-14 overflow-hidden group-hover:text-cap-purple transition-colors">
+          <h3 className="text-lg font-bold mb-2 text-cap-dark-blue group-hover:text-cap-purple transition-colors line-clamp-2">
             {title}
           </h3>
           <div className="flex items-center text-sm text-muted-foreground mb-4">

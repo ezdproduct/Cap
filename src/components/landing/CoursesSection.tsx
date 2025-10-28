@@ -41,7 +41,8 @@ const CoursesSection = () => {
     );
   }, [courses, activeFilter]);
 
-  const mobileCourseChunks = useMemo(() => chunk(filteredCourses, 2), [filteredCourses]);
+  // Thay đổi chunking: 1 thẻ/slide trên mobile
+  const mobileCourseChunks = useMemo(() => chunk(filteredCourses, 1), [filteredCourses]);
 
   return (
     <section id="courses" className="pt-0 pb-12 md:pb-16 bg-white">
@@ -76,7 +77,7 @@ const CoursesSection = () => {
               <CarouselContent className="-ml-2">
                 {isMobile ? (
                   mobileCourseChunks.map((chunk, index) => (
-                    <CarouselItem key={index} className="basis-1/2 pl-2">
+                    <CarouselItem key={index} className="basis-full pl-2">
                       <div className="space-y-2">
                         {chunk.map((course) => (
                            <motion.div key={course.id} className="p-1" variants={itemVariants} initial="hidden" animate="visible">

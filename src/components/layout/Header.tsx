@@ -44,7 +44,7 @@ const Header = () => {
                 key={item.name}
                 to={item.href}
                 href={item.href} // Dùng href cho thẻ <a>
-                className={`rounded-full px-4 py-1.5 text-caption font-medium transition-colors ${
+                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                   isActive ? "text-gray-900" : "text-gray-600 hover:text-gray-900"
                 }`}
               >

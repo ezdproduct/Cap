@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingSpinner from "./components/ui/LoadingSpinner";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AlertTriangle } from "lucide-react";
+import TopLoader from "./components/ui/TopLoader";
 
 // Skeletons
 import LearningHubSkeleton from "./pages/skeletons/LearningHubSkeleton";
@@ -33,6 +34,7 @@ const App = () => (
     <TooltipProvider>
       <Sonner />
       <BrowserRouter>
+        <TopLoader />
         <ErrorBoundary fallback={<ErrorFallback />}>
           <Routes>
             <Route 

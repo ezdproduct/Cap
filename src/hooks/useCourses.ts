@@ -9,6 +9,8 @@ export const useCourses = ({ page = 1, limit = 9 }: { page?: number; limit?: num
   const { data: tutorData } = useSuspenseQuery({
     queryKey: ["tutor_courses", { page, limit }],
     queryFn: () => fetchTutorCourses({ page, limit }),
+    // Dữ liệu sẽ được coi là mới trong 1 phút
+    staleTime: 1000 * 60 * 1, 
   });
 
   // Bước 2: Lấy bản đồ sản phẩm từ cache của React Query

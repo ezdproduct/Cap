@@ -20,7 +20,8 @@ const CourseDetail = () => {
   const externalUrl = `https://course.learnwithcap.com/courses/${courseSlug}`;
 
   const handleNavigateClick = () => {
-    window.open(externalUrl, '_blank');
+    // Chuyển hướng trong cùng một tab
+    window.location.href = externalUrl;
   };
 
   return (
@@ -49,7 +50,7 @@ const CourseDetail = () => {
                   className="w-full bg-cap-purple hover:bg-cap-purple/90 text-lg py-6"
                   onClick={handleNavigateClick}
                 >
-                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  <ShoppingCart className="h-5 w-5 mr-2" />
                   Xem chi tiết
                 </Button>
                 <ul className="mt-6 space-y-3 text-gray-700">

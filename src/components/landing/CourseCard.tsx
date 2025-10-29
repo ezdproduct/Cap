@@ -41,12 +41,12 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    // Chuyển hướng đến URL bên ngoài khi nút được nhấp
-    window.open(externalUrl, '_blank');
+    // Chuyển hướng trong cùng một tab
+    window.location.href = externalUrl;
   };
 
   return (
-    <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="h-full block group">
+    <a href={externalUrl} rel="noopener noreferrer" className="h-full block group">
       <Card className="overflow-hidden border h-full flex flex-col bg-white group-hover:shadow-lg transition-shadow duration-300">
         <div className="relative">
           <img src={image} alt={title} className="w-full h-48 object-cover" loading="lazy" />

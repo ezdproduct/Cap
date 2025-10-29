@@ -113,14 +113,16 @@ const LearningHub = () => {
       <Header />
       <main className="py-8 bg-white">
         <div className="px-10 mx-auto max-w-screen-2xl">
-          {/* Mobile Filter Button */}
-          <MobileFilterButton
-            filters={availableFilters}
-            selectedFilters={selectedFilters}
-            onFilterChange={handleFilterChange}
-            searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
-          />
+          {/* Mobile Filter Button - Căn trái */}
+          <div className="lg:hidden mb-6">
+            <MobileFilterButton
+              filters={availableFilters}
+              selectedFilters={selectedFilters}
+              onFilterChange={handleFilterChange}
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+            />
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8">
             {/* Desktop Sidebar */}

@@ -28,7 +28,7 @@ const MobileFilterButton: React.FC<MobileFilterButtonProps> = ({
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline" className="w-full flex items-center justify-center lg:hidden mb-6">
+        <Button variant="outline" className="w-auto flex items-center justify-center">
           <Filter className="w-4 h-4 mr-2" />
           Bộ lọc
         </Button>

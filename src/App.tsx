@@ -3,13 +3,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoadingSpinner from "./components/ui/LoadingSpinner";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AlertTriangle } from "lucide-react";
 import TopLoader from "./components/ui/TopLoader";
-
-// Skeletons
-import LearningHubSkeleton from "./pages/skeletons/LearningHubSkeleton";
+import FullPageLoader from "./components/ui/FullPageLoader";
 
 // Pages
 const Index = lazy(() => import("./pages/Index"));
@@ -36,40 +33,26 @@ const App = () => (
       <BrowserRouter>
         <TopLoader />
         <ErrorBoundary fallback={<ErrorFallback />}>
-          <Routes>
-            <Route 
-              path="/" 
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Index />
-                </Suspense>
-              } 
-            />
-            <Route 
-              path="/learning-hub" 
-              element={
-                <Suspense fallback={<LearningHubSkeleton />}>
-                  <LearningHub />
-                </Suspense>
-              } 
-            />
-            <Route 
-              path="/courses/:courseId" 
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <CourseDetail />
-                </Suspense>
-              } 
-            />
-            <Route 
-              path="*" 
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <NotFound />
-                </Suspense>
-              } 
-            />
-          </Routes>
+          <Suspense fallback={<FullPageLoader />}>
+            <Routes>
+              <Route 
+                path="/" 
+                element={<Index />} 
+              />
+              <Route 
+                path="/learning-hub" 
+                element={<LearningHub />} 
+              />
+              <Route 
+                path="/courses/:courseId" 
+                element={<CourseDetail />} 
+              />
+              <Route 
+                path="*" 
+                element={<NotFound />} 
+              />
+            </Routes>
+          </Suspense>
         </ErrorBoundary>
       </BrowserRouter>
     </TooltipProvider>
